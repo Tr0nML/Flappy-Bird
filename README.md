@@ -5,7 +5,7 @@ This version includes fullscreen support, sound effects, clean code architecture
 
 ---
 
-## 🎮 Features!!!
+## 🎮 Features!
 
 * Classic flappy gameplay with smooth physics
 * Real-time score display
