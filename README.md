@@ -53,9 +53,9 @@ Your high scores are automatically saved in a user-specific data folder, so they
 
 | Platform | Save Path                                              |
 |----------|-------------------------------------------------------|
-| Windows  | %APPDATA%\FlappyPy\flappy_scores.json                 |
-| macOS    | ~/Library/Application Support/FlappyPy/flappy_scores.json |
-| Linux    | ~/.local/share/FlappyPy/flappy_scores.json            |
+| Windows  | %APPDATA%\FlappyBird\flappy_scores.json                 |
+| macOS    | ~/Library/Application Support/FlappyBird/flappy_scores.json |
+| Linux    | ~/.local/share/FlappyBird/flappy_scores.json            |
 
 Each time you play, new scores are recorded and ranked locally.
 
@@ -64,6 +64,7 @@ Each time you play, new scores are recorded and ranked locally.
 Flappy/
 ├── flappy.py                 # Main game script
 ├── assets/
+│   ├── icon.ico
 │   ├── audio/
 │   │   ├── hit.wav
 │   │   ├── point.wav
@@ -90,7 +91,7 @@ pip install pyinstaller
 ```
 Build the executable:
 ```bash
-pyinstaller --noconsole --onefile --add-data "assets:assets" flappy.py
+pyinstaller --noconsole --onefile --add-data "assets:assets" --icon "assets/icon.ico" flappy.py
 ```
 The build output will appear in the dist/ folder:
 ```
