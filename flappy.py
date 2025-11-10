@@ -1,4 +1,11 @@
-import pygame, random, sys, os, math, json
+import pygame
+import random 
+import sys 
+import os
+import math
+import json
+import platform
+
 from pygame.locals import (
     QUIT, KEYDOWN, K_q, K_l, K_ESCAPE, K_F11, K_f, K_SPACE, K_UP, K_r, MOUSEBUTTONDOWN, VIDEORESIZE
 )
@@ -18,7 +25,22 @@ PIPE_GAP = 150
 PIPE_SPACING = 300
 
 MAX_LEADERBOARD_ENTRIES = 10
-LEADERBOARD_FILE = "flappy_scores.json"
+def get_data_dir(app_name="FlappyBird"):
+    system = platform.system()
+    if system == "Windows":
+        base = os.getenv('APPDATA') or os.path.expanduser("~\\AppData\\Roaming")
+    elif system == "Darwin":
+        base = os.path.expanduser("~/Library/Application Support")
+    else:
+        base = os.path.expanduser("~/.local/share")
+    data_dir = os.path.join(base, app_name)
+    try:
+        os.makedirs(data_dir, exist_ok=True)
+    except OSError:
+        pass
+    return data_dir
+
+LEADERBOARD_FILE = os.path.join(get_data_dir("FlappyBird"), "flappy_scores.json")
 
 # === RESOURCE LOADER ===
 def resource_path(relative_path):
@@ -454,12 +476,14 @@ while running:
                 state = "BEGIN"
             elif state == "BEGIN" and event.key in (K_SPACE, K_UP):
                 bird.bump()
-                if wing_snd: wing_snd.play()
+                if wing_snd: 
+                    wing_snd.play()
                 state = "PLAYING"
                 show_leaderboard = False
             elif state == "PLAYING" and event.key in (K_SPACE, K_UP):
                 bird.bump()
-                if wing_snd: wing_snd.play()
+                if wing_snd: 
+                    wing_snd.play()
             elif state == "GAME_OVER" and event.key in (K_r, K_SPACE, K_UP):
                 bird, bird_group, ground_group, pipe_group, score = reset_game(viewport_width)
                 state = "BEGIN"
@@ -470,12 +494,14 @@ while running:
         elif event.type == MOUSEBUTTONDOWN:
             if state == "BEGIN":
                 bird.bump()
-                if wing_snd: wing_snd.play()
+                if wing_snd: 
+                    wing_snd.play()
                 state = "PLAYING"
                 show_leaderboard = False
             elif state == "PLAYING":
                 bird.bump()
-                if wing_snd: wing_snd.play()
+                if wing_snd: 
+                    wing_snd.play()
 
     # Create game surface for current viewport
     game_surface = pygame.Surface((viewport_width, BASE_HEIGHT))
@@ -567,7 +593,8 @@ while running:
                 if p_mid <= bird_mid < p_mid + GAME_SPEED and not p.scored:
                     p.scored = True
                     score += 1
-                    if point_snd: point_snd.play()
+                    if point_snd: 
+                        point_snd.play()
 
         display_score(game_surface, score, viewport_width)
         
@@ -584,7 +611,8 @@ while running:
         hit_ground = pygame.sprite.spritecollide(bird, ground_group, False, pygame.sprite.collide_mask)
         hit_pipe = pygame.sprite.spritecollide(bird, pipe_group, False, pygame.sprite.collide_mask)
         if hit_ground or hit_pipe or bird.rect.top <= 0:
-            if hit_snd: hit_snd.play()
+            if hit_snd: 
+                hit_snd.play()
             # Check if high score
             final_rank = leaderboard.add_score(score)
             state = "GAME_OVER"
