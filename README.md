@@ -1,63 +1,65 @@
 # 🐦 Flappy Bird (Python + Pygame)
 
-A smooth and modern recreation of the classic **Flappy Bird**, built in Python using the [Pygame](https://www.pygame.org/) library.
-This version includes fullscreen support, sound effects, clean code architecture, and PyInstaller compatibility for easy distribution.
+A smooth, modern recreation of the classic Flappy Bird, built with [Pygame](https://www.pygame.org/).
+This version features a persistent leaderboard, fullscreen scaling, sound effects, and clean code architecture — perfect for learning or sharing.
 
----
+## 🎮 Features
 
-## 🎮 Features!
-
-* Classic flappy gameplay with smooth physics
-* Real-time score display
-* Animated bird and moving pipes
-* Ground scrolling and collision detection
-* Sound effects for wing, point, and hit
-* Toggle **fullscreen** (`F` or `F11`)
-* Mouse, Spacebar, or Arrow key control
-* Safe startup when no audio device is available
-* Packaged easily with PyInstaller (includes `resource_path` helper)
-
----
+- Classic gameplay with smooth physics and animations
+- Persistent leaderboard — your top scores are saved across runs and reinstalls
+- Responsive fullscreen toggle (F or F11)
+- Dynamic viewport resizing — see more of the world when expanding the window
+- Sound effects for wing, point, and hit events
+- Clean, modular codebase with classes for Bird, Pipe, and Ground
+- Safe startup when no audio device is available
+- PyInstaller-ready — build a single .exe or .app with all assets included
 
 ## 🧩 Requirements
 
-* Python **3.9+** (tested on 3.11)
-* `pygame` library (2.6.1+ recommended)
+- Python 3.9+ (tested on 3.11)
+- pygame library (2.6.1+ recommended)
 
-Install Pygame via pip:
-
+Install dependencies:
 ```bash
 pip install pygame
 ```
 
----
-
 ## 🚀 Getting Started
 
-1. **Clone the repository**
+Clone the repository
+```bash
+git clone https://github.com/Tr0nML/flappy-bird-pygame.git
+cd flappy-bird-pygame
+```
 
-   ```bash
-   git clone https://github.com/Tr0nML/flappy-bird-pygame.git
-   cd flappy-bird-pygame
-   ```
+Run the game
+```bash
+python flappy.py
+```
 
-2. **Run the game**
+## Controls
 
-   ```bash
-   python flappy.py
-   ```
+| Action                   | Key / Button                |
+|--------------------------|-----------------------------|
+| Flap                     | Space, ↑, or Mouse Click    |
+| Toggle Fullscreen        | F or F11                    |
+| Restart after Game Over  | R or Space                  |
+| Show / Hide Leaderboard  | L                           |
+| Quit                     | Q or Esc                    |
 
-3. **Controls**
+## 🏆 Leaderboard Persistence
 
-   * **Space / Up Arrow / Mouse Click** → Flap
-   * **F / F11** → Toggle fullscreen
-   * **R** → Restart after game over
-   * **Q / Esc** → Quit game
+Your high scores are automatically saved in a user-specific data folder, so they persist even after creating or reinstalling the .exe build.
 
----
+| Platform | Save Path                                              |
+|----------|-------------------------------------------------------|
+| Windows  | %APPDATA%\FlappyPy\flappy_scores.json                 |
+| macOS    | ~/Library/Application Support/FlappyPy/flappy_scores.json |
+| Linux    | ~/.local/share/FlappyPy/flappy_scores.json            |
+
+Each time you play, new scores are recorded and ranked locally.
 
 ## 📁 Project Structure
-
 ```
 Flappy/
 ├── flappy.py                 # Main game script
@@ -74,45 +76,51 @@ Flappy/
 │       ├── bluebird-downflap.png
 │       ├── message.png
 │       ├── pipe-green.png
-│       └── [0-9].png         # Number sprites for score display
+│       └── [0-9].png         # Score number sprites
 └── README.md
 ```
 
----
+## 🧱 Building a Standalone Executable
 
-## 🧱 Packaging to EXE / APP (Optional)
+To distribute your game easily:
 
-If you want to share it as a standalone executable:
-
+Install PyInstaller:
 ```bash
 pip install pyinstaller
+```
+Build the executable:
+```bash
 pyinstaller --noconsole --onefile --add-data "assets:assets" flappy.py
 ```
+The build output will appear in the dist/ folder:
+```
+dist/
+└── flappy.exe   # or flappy (macOS/Linux)
+```
+The included resource_path() helper ensures that assets load correctly in both development and packaged builds.
 
-The game uses a helper (`resource_path`) to locate assets correctly when bundled by PyInstaller.
+## 🪶 Technical Highlights
 
----
+- Written entirely in Python (Pygame)
+- Smooth 60 FPS animation
+- Resource-safe asset loading compatible with PyInstaller
+- Uses mask collision detection for pixel-perfect gameplay
+- Dynamic background and ground tiling based on viewport size
 
-## 💡 Notes
+## 💡 Tips
 
-* The game runs windowed by default at **400×600** resolution.
-* Fullscreen mode stretches the scene to fill your monitor.
-* Works smoothly on macOS, Windows, and Linux.
-* Audio is optional — it automatically disables if no device is detected.
-
----
+- Default window size: 400×600 px
+- Works seamlessly across Windows, macOS, and Linux
+- Fullscreen stretches to monitor resolution but maintains proportion
+- Audio gracefully disables if no sound device is found
 
 ## 🧑‍💻 Author
 
-**Aryan Garg**
+Aryan Garg
 
-Built for fun, practice, and nostalgia.
-Feel free to fork, play, and improve the game!
-
----
+Built for fun, nostalgia, and hands-on learning in Python game development.
+Feel free to fork, play, and improve it!
 
 ## 📜 License
 
-This project is licensed under the **MIT License** — you’re free to use, modify, and distribute it with attribution.
-
----
+Released under the MIT License — you're free to use, modify, and distribute this project with attribution.
